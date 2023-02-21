@@ -3,14 +3,9 @@ import { Box, Button, Stack, TextField, TableContainer, Table, TableHead, TableR
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Link } from "react-router-dom";
-
 import { Place } from "../interfaces";
-import axiosInstance from "../lib/axios";
+import { getApiPlaces } from "../services";
 
-async function getApiPlaces(search: string, signal?: AbortSignal) {
-  const { data } = await axiosInstance.get<Place[]>(`/places?search=${search}`, { signal });
-  return data;
-}
 
 export const Places = () => {
   const [places, setPlaces] = useState<Place[]>([]);

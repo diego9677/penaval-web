@@ -18,6 +18,7 @@ import { Brands } from "./pages/Brands";
 import { Places } from "./pages/Places";
 import { BrandForm } from "./pages/BrandForm";
 import { PlaceForm } from "./pages/PlaceForm";
+import { ProductForm } from "./pages/ProductForm";
 
 
 
@@ -69,6 +70,8 @@ function App() {
             </AppState>
           }
         />
+
+        {/* product section */}
         <Route
           path="/products"
           element={
@@ -77,6 +80,16 @@ function App() {
             </AppState>
           }
         />
+
+        <Route
+          path="/products/form"
+          element={
+            <AppState withLayout title="Formulario de productos">
+              <ProductForm />
+            </AppState>
+          }
+        />
+
         <Route
           path="/sales"
           element={

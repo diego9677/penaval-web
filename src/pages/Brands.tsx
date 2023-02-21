@@ -3,14 +3,9 @@ import { Box, Button, Stack, TextField, TableContainer, Table, TableHead, TableR
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Link } from "react-router-dom";
-
 import { Brand } from "../interfaces";
-import axiosInstance from "../lib/axios";
+import { getApiBrands } from "../services";
 
-async function getApiBrands(search: string, signal?: AbortSignal) {
-  const { data } = await axiosInstance.get<Brand[]>(`/brands?search=${search}`, { signal });
-  return data;
-}
 
 export const Brands = () => {
   const [brands, setBrands] = useState<Brand[]>([]);

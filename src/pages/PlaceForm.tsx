@@ -3,34 +3,13 @@ import { Button, Paper, Stack, TextField, Typography } from '@mui/material';
 import { Container } from "@mui/system";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
-import axiosInstance from "../lib/axios";
-import { Place } from "../interfaces";
 import AlertDialog from "../components/AlertDialog";
+import { createApiPlace, delteApiPlace, getApiPlace, updateApiPlace } from "../services";
 
 interface StateData {
   name: string;
   description?: string;
 }
-
-const getApiPlace = async (id: number) => {
-  const response = await axiosInstance.get<Place>(`/places/${id}`);
-  return response.data;
-};
-
-const createApiPlace = async (data: StateData) => {
-  const response = await axiosInstance.post<Place>('/places', data);
-  return response.data;
-};
-
-const updateApiPlace = async (id: number, data: StateData) => {
-  const response = await axiosInstance.put<Place>(`/places/${id}`, data);
-  return response.data;
-};
-
-const delteApiPlace = async (id: number) => {
-  const response = await axiosInstance.delete<Place>(`/places/${id}`);
-  return response.data;
-};
 
 export const PlaceForm = () => {
   const [data, setData] = useState<StateData>({ name: '', description: '' });

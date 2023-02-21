@@ -3,14 +3,8 @@ import { Box, Button, Stack, TextField, TableContainer, Table, TableHead, TableR
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Link } from "react-router-dom";
-
 import { Provider } from "../interfaces";
-import axiosInstance from "../lib/axios";
-
-async function getApiProviders(search: string, signal?: AbortSignal) {
-  const { data } = await axiosInstance.get<Provider[]>(`/providers?search=${search}`, { signal });
-  return data;
-}
+import { getApiProviders } from "../services";
 
 export const Providers = () => {
   const [providers, setProviders] = useState<Provider[]>([]);

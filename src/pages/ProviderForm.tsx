@@ -3,34 +3,13 @@ import { Button, Paper, Stack, TextField, Typography } from '@mui/material';
 import { Container } from "@mui/system";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
-import axiosInstance from "../lib/axios";
-import { Provider } from "../interfaces";
 import AlertDialog from "../components/AlertDialog";
+import { createApiProvide, delteApiProvider, getApiProvider, updateApiProvider } from "../services";
 
 interface StateData {
   name: string;
   address: string;
 }
-
-const getApiProvider = async (id: number) => {
-  const response = await axiosInstance.get<Provider>(`/providers/${id}`);
-  return response.data;
-};
-
-const createApiProvide = async (data: StateData) => {
-  const response = await axiosInstance.post<Provider>('/providers', data);
-  return response.data;
-};
-
-const updateApiProvider = async (id: number, data: StateData) => {
-  const response = await axiosInstance.put<Provider>(`/providers/${id}`, data);
-  return response.data;
-};
-
-const delteApiProvider = async (id: number) => {
-  const response = await axiosInstance.delete<Provider>(`/providers/${id}`);
-  return response.data;
-};
 
 export const ProviderForm = () => {
   const [data, setData] = useState<StateData>({ name: '', address: '' });

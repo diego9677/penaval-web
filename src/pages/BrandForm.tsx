@@ -3,34 +3,14 @@ import { Button, Paper, Stack, TextField, Typography } from '@mui/material';
 import { Container } from "@mui/system";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
-import axiosInstance from "../lib/axios";
-import { Brand } from "../interfaces";
 import AlertDialog from "../components/AlertDialog";
+import { createApiBrand, delteApiBrand, getApiBrand, updateApiBrand } from "../services";
 
 interface StateData {
   name: string;
   description?: string;
 }
 
-const getApiBrand = async (id: number) => {
-  const response = await axiosInstance.get<Brand>(`/brands/${id}`);
-  return response.data;
-};
-
-const createApiBrand = async (data: StateData) => {
-  const response = await axiosInstance.post<Brand>('/brands', data);
-  return response.data;
-};
-
-const updateApiBrand = async (id: number, data: StateData) => {
-  const response = await axiosInstance.put<Brand>(`/brands/${id}`, data);
-  return response.data;
-};
-
-const delteApiBrand = async (id: number) => {
-  const response = await axiosInstance.delete<Brand>(`/brands/${id}`);
-  return response.data;
-};
 
 export const BrandForm = () => {
   const [data, setData] = useState<StateData>({ name: '', description: '' });

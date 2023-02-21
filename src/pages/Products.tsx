@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Stack, TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-
-
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Product } from "../interfaces";
-import axiosInstance from "../lib/axios";
+import { getApiProducts } from "../services";
+import { Link } from "react-router-dom";
 
-async function getApiProducts(search: string, signal?: AbortSignal) {
-  const { data } = await axiosInstance.get<Product[]>(`/products?search=${search}`, { signal });
-  return data;
-}
+
+
 
 export const Products = () => {
   const [providers, setProviders] = useState<Product[]>([]);
@@ -28,7 +26,6 @@ export const Products = () => {
     setLoading(true);
     try {
       const data = await getApiProducts(search, signal);
-      console.log(data);
       setProviders(data);
     } finally {
       setLoading(false);
@@ -40,7 +37,9 @@ export const Products = () => {
     <Box sx={{ width: '100%' }}>
       <Stack spacing={5}>
         <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Button variant="outlined" color="primary" size="small">Nuevo</Button>
+          <Button variant="outlined" color="primary" size="small" component={Link} to='/products/form'>
+            Nuevo
+          </Button>
           <Stack direction="row" spacing={2}>
             <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
             <Button type="button" variant="outlined" color="success" size="small" onClick={() => getProducts()}>
@@ -62,8 +61,9 @@ export const Products = () => {
                     <TableCell align="center">Ubicación</TableCell>
                     <TableCell align="center">Catidad</TableCell>
                     <TableCell align="center">Precio</TableCell>
-                    <TableCell align="center">Creado</TableCell>
-                    <TableCell align="center">Actualizado</TableCell>
+                    {/* <TableCell align="center">Creado</TableCell>
+                    <TableCell align="center">Actualizado</TableCell> */}
+                    <TableCell align="center">Acion</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -81,8 +81,13 @@ export const Products = () => {
                       <TableCell align="center">{row.place.name}</TableCell>
                       <TableCell align="center">{row.stock}</TableCell>
                       <TableCell align="center">{row.price}</TableCell>
-                      <TableCell align="center">{row.createdAt}</TableCell>
-                      <TableCell align="center">{row.updatedAt}</TableCell>
+                      {/* <TableCell align="center">{row.createdAt}</TableCell>
+                      <TableCell align="center">{row.updatedAt}</TableCell> */}
+                      <TableCell align="center">
+                        <Button size="small" variant="text" color="success" component={Link} to={`/products/form?id=${row.id}`}>
+                          <ModeEditOutlineOutlinedIcon />
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
