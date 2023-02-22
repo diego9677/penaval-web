@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
 import AlertDialog from "../components/AlertDialog";
-import { createApiPlace, delteApiPlace, getApiPlace, updateApiPlace } from "../services";
+import { createApiPlace, deleteApiPlace, getApiPlace, updateApiPlace } from "../services";
 
 interface StateData {
   name: string;
@@ -43,7 +43,7 @@ export const PlaceForm = () => {
   };
 
   const onDelete = async () => {
-    await delteApiPlace(Number(id));
+    await deleteApiPlace(Number(id));
     navigate('/places', { replace: true });
   };
 

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 
 export const Products = () => {
-  const [providers, setProviders] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +26,7 @@ export const Products = () => {
     setLoading(true);
     try {
       const data = await getApiProducts(search, signal);
-      setProviders(data);
+      setProducts(data);
     } finally {
       setLoading(false);
     }
@@ -67,7 +67,7 @@ export const Products = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {providers.map((row) => (
+                  {products.map((row) => (
                     <TableRow
                       key={row.id}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

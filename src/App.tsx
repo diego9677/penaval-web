@@ -19,6 +19,7 @@ import { Places } from "./pages/Places";
 import { BrandForm } from "./pages/BrandForm";
 import { PlaceForm } from "./pages/PlaceForm";
 import { ProductForm } from "./pages/ProductForm";
+import { ShoppingForm } from "./pages/ShoppingForm";
 
 
 
@@ -104,6 +105,14 @@ function App() {
           element={
             <AppState withLayout title="Compras">
               <Shopping />
+            </AppState>
+          }
+        />
+        <Route
+          path="/shopping/form"
+          element={
+            <AppState withLayout title="Formulario de compras">
+              <ShoppingForm />
             </AppState>
           }
         />

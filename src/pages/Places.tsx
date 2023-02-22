@@ -5,7 +5,7 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import { Link } from "react-router-dom";
 import { Place } from "../interfaces";
 import { getApiPlaces } from "../services";
-
+import dayjs from 'dayjs';
 
 export const Places = () => {
   const [places, setPlaces] = useState<Place[]>([]);
@@ -71,8 +71,8 @@ export const Places = () => {
                       </TableCell>
                       <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">{row.description}</TableCell>
-                      <TableCell align="center">{row.createdAt}</TableCell>
-                      <TableCell align="center">{row.updatedAt}</TableCell>
+                      <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:MM')}</TableCell>
+                      <TableCell align="center">{dayjs(row.updatedAt).format('DD/MM/YYYY HH:MM')}</TableCell>
                       <TableCell align="center">
                         <Button size="small" variant="text" color="success" component={Link} to={`/places/form?id=${row.id}`}>
                           <ModeEditOutlineOutlinedIcon />

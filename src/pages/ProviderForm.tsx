@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
 import AlertDialog from "../components/AlertDialog";
-import { createApiProvide, delteApiProvider, getApiProvider, updateApiProvider } from "../services";
+import { createApiProvide, deleteApiProvider, getApiProvider, updateApiProvider } from "../services";
 
 interface StateData {
   name: string;
@@ -43,7 +43,7 @@ export const ProviderForm = () => {
   };
 
   const onDelete = async () => {
-    await delteApiProvider(Number(id));
+    await deleteApiProvider(Number(id));
     navigate('/providers', { replace: true });
   };
 

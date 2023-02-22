@@ -21,12 +21,13 @@ export const updateApiProduct = async (id: number, data: any) => {
   return response.data;
 };
 
-export const delteApiProduct = async (id: number) => {
+export const deleteApiProduct = async (id: number) => {
   const response = await axiosInstance.delete<Product>(`/products/${id}`);
   return response.data;
 };
 
 
+// places section
 export const getApiPlaces = async (search: string, signal?: AbortSignal) => {
   const { data } = await axiosInstance.get<Place[]>(`/places?search=${search}`, { signal });
   return data;
@@ -47,12 +48,13 @@ export const updateApiPlace = async (id: number, data: any) => {
   return response.data;
 };
 
-export const delteApiPlace = async (id: number) => {
+export const deleteApiPlace = async (id: number) => {
   const response = await axiosInstance.delete<Place>(`/places/${id}`);
   return response.data;
 };
 
 
+// providers section
 export const getApiProviders = async (search: string, signal?: AbortSignal) => {
   const { data } = await axiosInstance.get<Provider[]>(`/providers?search=${search}`, { signal });
   return data;
@@ -73,11 +75,12 @@ export const updateApiProvider = async (id: number, data: any) => {
   return response.data;
 };
 
-export const delteApiProvider = async (id: number) => {
+export const deleteApiProvider = async (id: number) => {
   const response = await axiosInstance.delete<Provider>(`/providers/${id}`);
   return response.data;
 };
 
+// brands section
 export const getApiBrands = async (search: string, signal?: AbortSignal) => {
   const { data } = await axiosInstance.get<Brand[]>(`/brands?search=${search}`, { signal });
   return data;
@@ -98,7 +101,7 @@ export const updateApiBrand = async (id: number, data: any) => {
   return response.data;
 };
 
-export const delteApiBrand = async (id: number) => {
+export const deleteApiBrand = async (id: number) => {
   const response = await axiosInstance.delete<Brand>(`/brands/${id}`);
   return response.data;
 };

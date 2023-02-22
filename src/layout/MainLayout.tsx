@@ -15,9 +15,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { NavLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+
+import DeveloperBoardOutlinedIcon from '@mui/icons-material/DeveloperBoardOutlined';
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
+import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined';
+import EmojiTransportationOutlinedIcon from '@mui/icons-material/EmojiTransportationOutlined';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
 const drawerWidth = 240;
 
@@ -43,6 +48,22 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
+
+const MenuItem = ({ to, title, icon }: { to: string; title: string; icon: React.ReactNode; }) => {
+  const location = useLocation();
+  const isSelected = location.pathname.includes(to);
+
+  return (
+    <ListItem disablePadding role={undefined}>
+      <ListItemButton color="inherit" component={RouterLink} to={to} selected={isSelected}>
+        <ListItemIcon>
+          {icon}
+        </ListItemIcon>
+        <ListItemText primary={title} />
+      </ListItemButton>
+    </ListItem>
+  );
+};
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -124,41 +145,14 @@ export const MainLayout = ({ title, children }: any) => {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem button disablePadding component={NavLink} to='/products' role={undefined}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Productos'} />
-            </ListItemButton>
-          </ListItem>
 
-          <ListItem button disablePadding component={NavLink} to='/providers' role={undefined}>
-            <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Proveedores'} />
-            </ListItemButton>
-          </ListItem>
+          <MenuItem to="/sales" title="Ventas" icon={<ShoppingCartCheckoutIcon />} />
+          <MenuItem to="/products" title="Productos" icon={<InventoryOutlinedIcon />} />
+          <MenuItem to="/shopping" title="Compras" icon={<AddBusinessIcon />} />
+          <MenuItem to="/providers" title="Proveedores" icon={<EmojiTransportationOutlinedIcon />} />
+          <MenuItem to="/brands" title="Marcas" icon={<DeveloperBoardOutlinedIcon />} />
+          <MenuItem to="/places" title="Ubicaciones" icon={<PinDropOutlinedIcon />} />
 
-          <ListItem button disablePadding component={NavLink} to='/brands' role={undefined}>
-            <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Marcas'} />
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem button disablePadding component={NavLink} to='/places' role={undefined}>
-            <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Ubicaciones'} />
-            </ListItemButton>
-          </ListItem>
         </List>
       </Drawer>
       <Main open={open}>

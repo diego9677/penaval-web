@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
 import AlertDialog from "../components/AlertDialog";
-import { createApiProduct, delteApiProduct, getApiBrands, getApiPlaces, getApiProduct, updateApiProduct } from "../services";
+import { createApiProduct, deleteApiProduct, getApiBrands, getApiPlaces, getApiProduct, updateApiProduct } from "../services";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -63,7 +63,6 @@ export const ProductForm = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(data);
     if (id) {
       await updateApiProduct(Number(id), data);
       navigate('/products', { replace: true });
@@ -74,7 +73,7 @@ export const ProductForm = () => {
   };
 
   const onDelete = async () => {
-    await delteApiProduct(Number(id));
+    await deleteApiProduct(Number(id));
     navigate('/products', { replace: true });
   };
 

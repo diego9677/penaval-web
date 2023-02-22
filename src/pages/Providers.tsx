@@ -5,6 +5,7 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import { Link } from "react-router-dom";
 import { Provider } from "../interfaces";
 import { getApiProviders } from "../services";
+import dayjs from 'dayjs';
 
 export const Providers = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
@@ -70,8 +71,8 @@ export const Providers = () => {
                       </TableCell>
                       <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">{row.address}</TableCell>
-                      <TableCell align="center">{row.createdAt}</TableCell>
-                      <TableCell align="center">{row.updatedAt}</TableCell>
+                      <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:MM')}</TableCell>
+                      <TableCell align="center">{dayjs(row.updatedAt).format('DD/MM/YYYY HH:MM')}</TableCell>
                       <TableCell align="center">
                         <Button size="small" variant="text" color="success" component={Link} to={`/providers/form?id=${row.id}`}>
                           <ModeEditOutlineOutlinedIcon />

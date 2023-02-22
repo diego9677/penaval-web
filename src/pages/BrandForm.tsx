@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
 import AlertDialog from "../components/AlertDialog";
-import { createApiBrand, delteApiBrand, getApiBrand, updateApiBrand } from "../services";
+import { createApiBrand, deleteApiBrand, getApiBrand, updateApiBrand } from "../services";
 
 interface StateData {
   name: string;
@@ -44,7 +44,7 @@ export const BrandForm = () => {
   };
 
   const onDelete = async () => {
-    await delteApiBrand(Number(id));
+    await deleteApiBrand(Number(id));
     navigate('/brands', { replace: true });
   };
 
