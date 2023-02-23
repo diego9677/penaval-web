@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 interface Base {
   createdAt: string;
   updatedAt: string;
@@ -16,7 +18,7 @@ export interface User extends Base {
   person: Person;
 }
 
-export interface Person extends Base {
+export interface Person {
   id: number;
   firstName: string;
   lastName: string;
@@ -59,4 +61,69 @@ export interface Brand extends Base {
   name: string;
   description?: string;
   products: ProductShort[];
+}
+
+
+export interface Shopping extends Base {
+  id: number;
+  provider: {
+    id: number;
+    name: string;
+  };
+  shoppingDetail: {
+    id: number;
+    quantity: number;
+    pucharsePrice: number;
+    salePrice: number;
+    product: {
+      id: number;
+      code: string;
+    };
+  }[];
+}
+
+export interface Sale extends Base {
+  id: number;
+  client: {
+    id: number;
+    nit: string;
+    person: Person;
+  };
+  saleDetail: {
+    id: number;
+    quantity: number;
+    salePrice: number;
+    product: {
+      id: number;
+      code: string;
+    };
+  }[];
+}
+
+// shopping form
+export interface ShoppingCart {
+  productCode: string;
+  productId: number;
+  quantity: number;
+  pucharsePrice: number;
+  salePrice: number;
+}
+
+
+export interface SaleCart {
+  productCode: string;
+  productId: number;
+  quantity: number;
+  salePrice: number;
+}
+
+export interface ParamsReport {
+  begin: Dayjs | null;
+  end: Dayjs | null;
+}
+
+export interface Client extends Base {
+  id: number;
+  nit: string;
+  person: Person;
 }

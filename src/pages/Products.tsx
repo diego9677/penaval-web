@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Stack, TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from "@mui/material";
+import { Box, Button, Stack, TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Chip, Typography } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Product } from "../interfaces";
@@ -51,7 +51,7 @@ export const Products = () => {
         <Stack>
           {!loading &&
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">#</TableCell>
@@ -61,8 +61,6 @@ export const Products = () => {
                     <TableCell align="center">Ubicación</TableCell>
                     <TableCell align="center">Catidad</TableCell>
                     <TableCell align="center">Precio</TableCell>
-                    {/* <TableCell align="center">Creado</TableCell>
-                    <TableCell align="center">Actualizado</TableCell> */}
                     <TableCell align="center">Acion</TableCell>
                   </TableRow>
                 </TableHead>
@@ -79,10 +77,10 @@ export const Products = () => {
                       <TableCell align="center">{row.code}</TableCell>
                       <TableCell align="center">{row.measures}</TableCell>
                       <TableCell align="center">{row.place.name}</TableCell>
-                      <TableCell align="center">{row.stock}</TableCell>
+                      <TableCell align="center">
+                        <Chip sx={{ padding: '1px 2px 1px 2px' }} label={<Typography variant="body2">{row.stock}</Typography>} variant="outlined" color={row.stock > 0 ? 'success' : 'error'} />
+                      </TableCell>
                       <TableCell align="center">{row.price}</TableCell>
-                      {/* <TableCell align="center">{row.createdAt}</TableCell>
-                      <TableCell align="center">{row.updatedAt}</TableCell> */}
                       <TableCell align="center">
                         <Button size="small" variant="text" color="success" component={Link} to={`/products/form?id=${row.id}`}>
                           <ModeEditOutlineOutlinedIcon />

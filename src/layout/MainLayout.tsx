@@ -65,9 +65,7 @@ const MenuItem = ({ to, title, icon }: { to: string; title: string; icon: React.
   );
 };
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+const AppBar = styled(MuiAppBar, { shouldForwardProp: (prop) => prop !== 'open' })<AppBarProps>(({ theme, open }) => ({
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -93,7 +91,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export const MainLayout = ({ title, children }: any) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   React.useEffect(() => {
     document.title = title;

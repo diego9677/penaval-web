@@ -20,6 +20,7 @@ import { BrandForm } from "./pages/BrandForm";
 import { PlaceForm } from "./pages/PlaceForm";
 import { ProductForm } from "./pages/ProductForm";
 import { ShoppingForm } from "./pages/ShoppingForm";
+import { SaleForm } from "./pages/SaleForm";
 
 
 
@@ -96,6 +97,14 @@ function App() {
           element={
             <AppState withLayout title="Ventas">
               <Sales />
+            </AppState>
+          }
+        />
+        <Route
+          path="/sales/form"
+          element={
+            <AppState withLayout title="Formulario de ventas">
+              <SaleForm />
             </AppState>
           }
         />

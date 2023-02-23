@@ -1,6 +1,6 @@
 import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, Card, CardContent, Typography, Stack } from '@mui/material';
 import React, { useEffect, useState } from "react";
-import { Product, ShoppingCart } from "../interfaces";
+import { Product, SaleCart } from "../interfaces";
 
 
 interface Props {
@@ -8,38 +8,38 @@ interface Props {
   product: Product | undefined;
   open: boolean;
   handleOpenDialog: () => void;
-  onConfirmDialog: (shoppingState: ShoppingCart) => void;
+  onConfirmDialog: (shoppingState: SaleCart) => void;
 }
 
-export const DialogShoppingForm = ({ open, title, product, handleOpenDialog, onConfirmDialog }: Props) => {
-  const [shoppingState, setShoppingState] = useState<ShoppingCart>({ productId: 0, productCode: '', quantity: 0, pucharsePrice: 0, salePrice: 0 });
+export const DialogSaleForm = ({ open, title, product, handleOpenDialog, onConfirmDialog }: Props) => {
+  const [saleState, setSaleState] = useState<SaleCart>({ productId: 0, productCode: '', quantity: 0, salePrice: 0 });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const val = Number(value);
     if (val) {
-      setShoppingState((prev) => ({ ...prev, [name]: val }));
+      setSaleState((prev) => ({ ...prev, [name]: val }));
     }
   };
 
   useEffect(() => {
     if (product) {
-      setShoppingState((prev) => ({ ...prev, productId: product.id, productCode: product.code }));
+      setSaleState((prev) => ({ ...prev, productId: product.id, productCode: product.code, salePrice: Number(product.price) }));
     }
 
     return () => {
-      setShoppingState({ productId: 0, productCode: '', quantity: 0, pucharsePrice: 0, salePrice: 0 });
+      setSaleState({ productId: 0, productCode: '', quantity: 0, salePrice: 0 });
     };
   }, [product]);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (typeof shoppingState.quantity === 'string' || typeof shoppingState.pucharsePrice === 'string' || typeof shoppingState.salePrice === 'string') {
+    if (typeof saleState.quantity === 'string' || typeof saleState.salePrice === 'string') {
       alert('Formulario no valido');
       return;
     }
 
-    onConfirmDialog(shoppingState);
+    onConfirmDialog(saleState);
   };
 
   return (
@@ -82,19 +82,7 @@ export const DialogShoppingForm = ({ open, title, product, handleOpenDialog, onC
             type="number"
             fullWidth
             variant="standard"
-            value={shoppingState.quantity || ''}
-            onChange={handleChange}
-          />
-
-          <TextField
-            autoFocus
-            name="pucharsePrice"
-            margin="dense"
-            label="Precio de compra"
-            type="number"
-            fullWidth
-            variant="standard"
-            value={shoppingState.pucharsePrice || ''}
+            value={saleState.quantity || ''}
             onChange={handleChange}
           />
 
@@ -106,7 +94,7 @@ export const DialogShoppingForm = ({ open, title, product, handleOpenDialog, onC
             type="number"
             fullWidth
             variant="standard"
-            value={shoppingState.salePrice || ''}
+            value={saleState.salePrice || ''}
             onChange={handleChange}
           />
 
