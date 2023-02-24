@@ -154,7 +154,10 @@ export const MainLayout = ({ title, children }: any) => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <AccountCircle /> &nbsp;
+                <Typography variant="body2" noWrap component="div" sx={{ flexGrow: 1 }}>
+                  {authState.user?.person.firstName} {authState.user?.person.lastName}
+                </Typography>
               </IconButton>
               <Menu
                 id="menu-appbar"
