@@ -85,7 +85,6 @@ export const Shopping = () => {
     setLoading(true);
     try {
       const data = await getApiShopping(params);
-      console.log(data);
       setShopping(data);
     } finally {
       setLoading(false);
@@ -143,25 +142,27 @@ export const Shopping = () => {
           </LocalizationProvider>
         </Stack>
 
-        {!loading &&
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center"></TableCell>
-                  <TableCell align="center">#</TableCell>
-                  <TableCell align="center">Proveedor</TableCell>
-                  <TableCell align="center">Creado</TableCell>
-                  <TableCell align="center">Productos</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {shopping.map((row) => <Row key={row.id} row={row} />)}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        }
-        {loading && 'loading'}
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+          {!loading &&
+            <TableContainer sx={{ maxHeight: 600 }}>
+              <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center"></TableCell>
+                    <TableCell align="center">#</TableCell>
+                    <TableCell align="center">Proveedor</TableCell>
+                    <TableCell align="center">Creado</TableCell>
+                    <TableCell align="center">Productos</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {shopping.map((row) => <Row key={row.id} row={row} />)}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          }
+          {loading && 'loading'}
+        </Paper>
 
       </Stack>
     </Box>

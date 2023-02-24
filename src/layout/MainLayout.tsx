@@ -21,14 +21,19 @@ import DeveloperBoardOutlinedIcon from '@mui/icons-material/DeveloperBoardOutlin
 import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined';
 import EmojiTransportationOutlinedIcon from '@mui/icons-material/EmojiTransportationOutlined';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import { Menu, MenuItem as MenutItemMaterial } from "@mui/material";
+import { AuthContext } from "../context/AuthProvider";
 
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
 }>(({ theme, open }) => ({
+  height: '100vh',
+  backgroundColor: '#26292c',
   flexGrow: 1,
   padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {
@@ -92,10 +97,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export const MainLayout = ({ title, children }: any) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  const { logout, authState } = React.useContext(AuthContext);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   React.useEffect(() => {
     document.title = title;
   }, [title]);
+
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -103,6 +120,11 @@ export const MainLayout = ({ title, children }: any) => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const onLogout = () => {
+    logout();
+    handleClose();
   };
 
   return (
@@ -118,9 +140,41 @@ export const MainLayout = ({ title, children }: any) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="body1" noWrap component="div">
+          <Typography variant="body1" noWrap component="div" sx={{ flexGrow: 1 }}>
             {title}
           </Typography>
+
+          {authState.isLogged && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenutItemMaterial onClick={onLogout}>Cerrar Sesión</MenutItemMaterial>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer

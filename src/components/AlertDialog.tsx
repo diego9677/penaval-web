@@ -19,6 +19,7 @@ export default function AlertDialog({ title, text, open, textConfirmButton, text
 
   return (
     <Dialog
+      fullWidth
       open={open}
       onClose={handleOpenDialog}
       aria-labelledby="alert-dialog-title"

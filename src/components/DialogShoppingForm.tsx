@@ -24,7 +24,7 @@ export const DialogShoppingForm = ({ open, title, product, handleOpenDialog, onC
 
   useEffect(() => {
     if (product) {
-      setShoppingState((prev) => ({ ...prev, productId: product.id, productCode: product.code }));
+      setShoppingState((prev) => ({ ...prev, productId: product.id, productCode: product.code, salePrice: Number(product.price) }));
     }
 
     return () => {

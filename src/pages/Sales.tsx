@@ -44,7 +44,7 @@ const Row = ({ row }: { row: Sale; }) => {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Detalle de compra
+                Detalle de venta
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
@@ -83,7 +83,6 @@ export const Sales = () => {
     setLoading(true);
     try {
       const data = await getApiSales(params);
-      console.log(data);
       setSales(data);
     } finally {
       setLoading(false);
@@ -141,26 +140,27 @@ export const Sales = () => {
           </LocalizationProvider>
         </Stack>
 
-        {!loading &&
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center"></TableCell>
-                  <TableCell align="center">nit</TableCell>
-                  <TableCell align="center">Cliente</TableCell>
-                  <TableCell align="center">Creado</TableCell>
-                  <TableCell align="center">Productos</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {sales.map((row) => <Row key={row.id} row={row} />)}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        }
-        {loading && 'loading'}
-
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+          {!loading &&
+            <TableContainer sx={{ maxHeight: 600 }}>
+              <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center"></TableCell>
+                    <TableCell align="center">nit</TableCell>
+                    <TableCell align="center">Cliente</TableCell>
+                    <TableCell align="center">Creado</TableCell>
+                    <TableCell align="center">Productos</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {sales.map((row) => <Row key={row.id} row={row} />)}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          }
+          {loading && 'loading'}
+        </Paper>
       </Stack>
     </Box>
   );

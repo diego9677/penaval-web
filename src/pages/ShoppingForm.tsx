@@ -120,57 +120,60 @@ export const ShoppingForm = () => {
             </Stack>
           </Stack>
 
-          {!loading &&
-            <TableContainer component={Paper} elevation={0}>
-              <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left">Rodamiento</TableCell>
-                    <TableCell align="center">Cantidad</TableCell>
-                    <TableCell align="center">Precio</TableCell>
-                    <TableCell align="center">Acion</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {products.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell align="left">
-                        <Stack spacing={0.5}>
-                          <Typography variant="caption" color="text.primary">{row.brand.name}</Typography>
-                          <Typography variant="body2" color="text.primary">{row.code}</Typography>
-                          <Typography variant="body2" color="text.secondary" fontSize={14} fontWeight="Semi Bold">{row.measures}</Typography>
-                          <Typography variant="caption" color="text.success">{row.place.name}</Typography>
-                        </Stack>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Chip sx={{ padding: '1px 2px 1px 2px' }} label={<Typography variant="body2">{row.stock}</Typography>} variant="outlined" color={row.stock > 0 ? 'success' : 'error'} />
-                      </TableCell>
-                      <TableCell align="center">{row.price} Bs</TableCell>
-                      <TableCell align="center">
-                        <Button size="small" variant="text" color="success" onClick={() => selectProduct(row)}>
-                          <ArrowForwardIcon />
-                        </Button>
-                      </TableCell>
+          <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
+            {!loading &&
+              <TableContainer sx={{ maxHeight: 600 }}>
+                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="left">Rodamiento</TableCell>
+                      <TableCell align="center">Cantidad</TableCell>
+                      <TableCell align="center">Precio</TableCell>
+                      <TableCell align="center">Acion</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          }
+                  </TableHead>
+                  <TableBody>
+                    {products.map((row) => (
+                      <TableRow
+                        key={row.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      >
+                        <TableCell align="left">
+                          <Stack spacing={0.5}>
+                            <Typography variant="caption" color="text.primary">{row.brand.name}</Typography>
+                            <Typography variant="body2" color="text.primary">{row.code}</Typography>
+                            <Typography variant="body2" color="text.secondary" fontSize={14} fontWeight="Semi Bold">{row.measures}</Typography>
+                            <Typography variant="caption" color="text.success">{row.place.name}</Typography>
+                          </Stack>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Chip sx={{ padding: '1px 2px 1px 2px' }} label={<Typography variant="body2">{row.stock}</Typography>} variant="outlined" color={row.stock > 0 ? 'success' : 'error'} />
+                        </TableCell>
+                        <TableCell align="center">{row.price} Bs</TableCell>
+                        <TableCell align="center">
+                          <Button size="small" variant="text" color="success" onClick={() => selectProduct(row)}>
+                            <ArrowForwardIcon />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            }
 
-          {loading &&
-            <div>loading</div>
-          }
+            {loading && <div>loading</div>}
+
+          </Paper>
 
         </Paper>
 
-        <Paper sx={{ padding: '20px', flex: 1 }} component={Stack} spacing={2}>
-          <Typography variant="subtitle1">Carrito de compras</Typography>
+        <Paper sx={{ padding: '20px', flex: 1, overflow: 'hidden' }}>
 
           <Stack spacing={2}>
+
+            <Typography variant="subtitle1">Carrito de compras</Typography>
+
             {providers &&
               <FormControl size="small" fullWidth>
                 <InputLabel id="demo-simple-select-label">Proveedor</InputLabel>
@@ -187,47 +190,49 @@ export const ShoppingForm = () => {
               </FormControl>
             }
 
-            <TableContainer component={Paper} elevation={0}>
-              <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left">Codigo</TableCell>
-                    <TableCell align="center">Cantidad</TableCell>
-                    <TableCell align="center">P. Compra</TableCell>
-                    <TableCell align="center">P. Venta</TableCell>
-                    <TableCell align="center">Subtotal</TableCell>
-                    <TableCell />
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {shoppingCartState.map((row, index) => (
-                    <TableRow
-                      key={`${index}-${row.productCode}`}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell align="left">{row.productCode}</TableCell>
-                      <TableCell align="center">{row.quantity}</TableCell>
-                      <TableCell align="center">{row.pucharsePrice} Bs</TableCell>
-                      <TableCell align="center">{row.salePrice} Bs</TableCell>
-                      <TableCell align="center">{Math.round((row.quantity * row.pucharsePrice) * 10) / 10} Bs</TableCell>
-                      <TableCell align="center">
-                        <Button type="button" size="small" variant="text" color="error" onClick={() => removeItem(row.productCode)}>
-                          <CloseIcon />
-                        </Button>
-                      </TableCell>
+            <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
+              <TableContainer sx={{ maxHeight: 450 }}>
+                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="left">Codigo</TableCell>
+                      <TableCell align="center">Cantidad</TableCell>
+                      <TableCell align="center">P. Compra</TableCell>
+                      <TableCell align="center">P. Venta</TableCell>
+                      <TableCell align="center">Subtotal</TableCell>
+                      <TableCell />
                     </TableRow>
-                  ))}
-                </TableBody>
-                <TableFooter>
-                  <TableRow>
-                    <TableCell variant="head" align="left">Total:</TableCell>
-                    <TableCell colSpan={3} />
-                    <TableCell variant="head" align="center">{setTotal()} Bs</TableCell>
-                    <TableCell />
-                  </TableRow>
-                </TableFooter>
-              </Table>
-            </TableContainer>
+                  </TableHead>
+                  <TableBody>
+                    {shoppingCartState.map((row, index) => (
+                      <TableRow
+                        key={`${index}-${row.productCode}`}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      >
+                        <TableCell align="left">{row.productCode}</TableCell>
+                        <TableCell align="center">{row.quantity}</TableCell>
+                        <TableCell align="center">{row.pucharsePrice} Bs</TableCell>
+                        <TableCell align="center">{row.salePrice} Bs</TableCell>
+                        <TableCell align="center">{Math.round((row.quantity * row.pucharsePrice) * 10) / 10} Bs</TableCell>
+                        <TableCell align="center">
+                          <Button type="button" size="small" variant="text" color="error" onClick={() => removeItem(row.productCode)}>
+                            <CloseIcon />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                  <TableFooter>
+                    <TableRow>
+                      <TableCell variant="head" align="left">Total:</TableCell>
+                      <TableCell colSpan={3} />
+                      <TableCell variant="head" align="center">{setTotal()} Bs</TableCell>
+                      <TableCell />
+                    </TableRow>
+                  </TableFooter>
+                </Table>
+              </TableContainer>
+            </Paper>
 
             <Stack direction="row" spacing={2}>
               <Button type="button" variant="outlined" size="small" color="error" fullWidth onClick={onClean}>limpiar</Button>

@@ -46,10 +46,10 @@ export const Places = () => {
           </Stack>
         </Stack>
 
-        <Stack>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           {!loading &&
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableContainer sx={{ maxHeight: 600 }}>
+              <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">#</TableCell>
@@ -85,7 +85,7 @@ export const Places = () => {
             </TableContainer>
           }
           {loading && 'loading'}
-        </Stack>
+        </Paper>
 
       </Stack>
     </Box>
