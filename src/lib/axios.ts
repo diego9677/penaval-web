@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 
 
 const axiosInstance = axios.create({
-  baseURL: 'https//penaval.com/api'
+  baseURL: 'https://penaval.com/api'
 });
 
 
