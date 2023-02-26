@@ -35,7 +35,7 @@ const Row = ({ row }: { row: ShoppingType; }) => {
           {row.id}
         </TableCell>
         <TableCell align="center">{row.provider.name}</TableCell>
-        <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:MM')}</TableCell>
+        <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
         <TableCell align="center">{row.shoppingDetail.length}</TableCell>
       </TableRow>
 

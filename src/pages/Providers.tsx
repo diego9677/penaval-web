@@ -78,8 +78,8 @@ export const Providers = () => {
                       </TableCell>
                       <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">{row.address}</TableCell>
-                      <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:MM')}</TableCell>
-                      <TableCell align="center">{dayjs(row.updatedAt).format('DD/MM/YYYY HH:MM')}</TableCell>
+                      <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
+                      <TableCell align="center">{dayjs(row.updatedAt).format('DD/MM/YYYY HH:mm')}</TableCell>
                       <TableCell align="center">
                         <Button size="small" variant="text" color="success" component={Link} to={`/providers/form?id=${row.id}`}>
                           <ModeEditOutlineOutlinedIcon />
