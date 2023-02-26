@@ -86,7 +86,7 @@ export const Products = () => {
                       <TableCell align="center">
                         <Chip sx={{ padding: '1px 2px 1px 2px' }} label={<Typography variant="body2">{row.stock}</Typography>} variant="outlined" color={row.stock > 0 ? 'success' : 'error'} />
                       </TableCell>
-                      <TableCell align="center">{row.price}</TableCell>
+                      <TableCell align="center">{row.price} Bs</TableCell>
                       <TableCell align="center">
                         <Button size="small" variant="text" color="success" component={Link} to={`/products/form?id=${row.id}`}>
                           <ModeEditOutlineOutlinedIcon />
