@@ -87,7 +87,6 @@ export const DialogShoppingForm = ({ open, title, product, handleOpenDialog, onC
           />
 
           <TextField
-            autoFocus
             name="pucharsePrice"
             margin="dense"
             label="Precio de compra"
@@ -99,7 +98,6 @@ export const DialogShoppingForm = ({ open, title, product, handleOpenDialog, onC
           />
 
           <TextField
-            autoFocus
             name="salePrice"
             margin="dense"
             label="Precio de venta"

@@ -144,7 +144,7 @@ export const Shopping = () => {
 
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           {!loading &&
-            <TableContainer sx={{ maxHeight: 600 }}>
+            <TableContainer sx={{ maxHeight: '70vh' }}>
               <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>

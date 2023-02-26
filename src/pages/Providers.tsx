@@ -30,6 +30,10 @@ export const Providers = () => {
     }
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await getProviders();
+  };
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -38,17 +42,20 @@ export const Providers = () => {
           <Button variant="outlined" color="primary" size="small" component={Link} to='/providers/form'>
             Nuevo
           </Button>
-          <Stack direction="row" spacing={2}>
-            <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
-            <Button type="button" variant="outlined" color="success" size="small" onClick={() => getProviders()}>
-              <SearchOutlinedIcon />
-            </Button>
-          </Stack>
+
+          <form onSubmit={onSubmit}>
+            <Stack direction="row" spacing={2}>
+              <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
+              <Button type="submit" variant="outlined" color="success" size="small">
+                <SearchOutlinedIcon />
+              </Button>
+            </Stack>
+          </form>
         </Stack>
 
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           {!loading &&
-            <TableContainer sx={{ maxHeight: 600 }}>
+            <TableContainer sx={{ maxHeight: '70vh' }}>
               <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>

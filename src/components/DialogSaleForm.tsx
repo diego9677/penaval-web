@@ -87,7 +87,6 @@ export const DialogSaleForm = ({ open, title, product, handleOpenDialog, onConfi
           />
 
           <TextField
-            autoFocus
             name="salePrice"
             margin="dense"
             label="Precio de venta"

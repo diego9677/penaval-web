@@ -104,6 +104,12 @@ export const ShoppingForm = () => {
     setLoading(false);
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await getProducts();
+  };
+
+
   return (
     <Box sx={{ width: '100%' }}>
       <Stack direction='row' spacing={3}>
@@ -112,18 +118,21 @@ export const ShoppingForm = () => {
           <Stack direction="row" justifyContent="space-between" alignItems="self-start">
             <Typography variant="subtitle1">Lista de productos</Typography>
 
-            <Stack direction="row" spacing={1}>
-              <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
-              <Button type="button" variant="outlined" color="success" size="small" onClick={() => getProducts()}>
-                <SearchOutlinedIcon />
-              </Button>
-            </Stack>
+            <form onSubmit={onSubmit}>
+              <Stack direction="row" spacing={1}>
+                <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
+                <Button type="button" variant="outlined" color="success" size="small" onClick={() => getProducts()}>
+                  <SearchOutlinedIcon />
+                </Button>
+              </Stack>
+            </form>
           </Stack>
 
-          <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
-            {!loading &&
-              <TableContainer sx={{ maxHeight: 600 }}>
-                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+
+          {!loading &&
+            <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
+              <TableContainer sx={{ maxHeight: '70vh' }}>
+                <Table stickyHeader aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="left">Rodamiento</TableCell>
@@ -160,12 +169,10 @@ export const ShoppingForm = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
-            }
+            </Paper>
+          }
 
-            {loading && <div>loading</div>}
-
-          </Paper>
-
+          {loading && 'loading'}
         </Paper>
 
         <Paper sx={{ padding: '20px', flex: 1, overflow: 'hidden' }}>
@@ -191,8 +198,8 @@ export const ShoppingForm = () => {
             }
 
             <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
-              <TableContainer sx={{ maxHeight: 450 }}>
-                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableContainer sx={{ maxHeight: '47vh' }}>
+                <Table stickyHeader aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="left">Codigo</TableCell>

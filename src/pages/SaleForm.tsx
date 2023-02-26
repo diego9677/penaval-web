@@ -28,7 +28,8 @@ export const SaleForm = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    getProducts(controller.signal);
+    getProducts(controller.signal)
+      .finally(() => setLoading(false));
 
     return () => {
       controller.abort();
@@ -45,12 +46,8 @@ export const SaleForm = () => {
   };
 
   const getProducts = async (signal?: AbortSignal) => {
-    try {
-      const data = await getApiProducts(search, signal);
-      setProducts(data);
-    } finally {
-      setLoading(false);
-    }
+    const data = await getApiProducts(search, signal);
+    setProducts(data);
   };
 
   const getShoppingData = (shopping: SaleCart) => {
@@ -97,7 +94,6 @@ export const SaleForm = () => {
       alert('No hay productos en el carrito');
       return;
     }
-
     setLoading(true);
     const data = { ...saleState, products: saleCartState };
     await createApiSale(data);
@@ -113,6 +109,13 @@ export const SaleForm = () => {
     }
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    e.preventDefault();
+    await getProducts();
+    setLoading(false);
+  };
+
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -122,18 +125,20 @@ export const SaleForm = () => {
           <Stack direction="row" justifyContent="space-between" alignItems="self-start">
             <Typography variant="subtitle1">Lista de productos</Typography>
 
-            <Stack direction="row" spacing={1}>
-              <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
-              <Button type="button" variant="outlined" color="success" size="small" onClick={() => getProducts()}>
-                <SearchOutlinedIcon />
-              </Button>
-            </Stack>
+            <form onSubmit={onSubmit}>
+              <Stack direction="row" spacing={1}>
+                <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
+                <Button type="submit" variant="outlined" color="success" size="small">
+                  <SearchOutlinedIcon />
+                </Button>
+              </Stack>
+            </form>
           </Stack>
 
-          <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
-            {!loading &&
-              <TableContainer sx={{ maxHeight: 600 }}>
-                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+          {!loading &&
+            <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
+              <TableContainer sx={{ maxHeight: '70vh' }}>
+                <Table stickyHeader aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="left">Rodamiento</TableCell>
@@ -172,11 +177,10 @@ export const SaleForm = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
-            }
+            </Paper>
+          }
 
-            {loading && <div>loading</div>}
-
-          </Paper>
+          {loading && 'loading'}
 
         </Paper>
 
@@ -220,7 +224,6 @@ export const SaleForm = () => {
 
             <Stack direction="row" spacing={2} sx={{ flex: 1 }}>
               <TextField
-                autoFocus
                 name="phone"
                 label="Telefono"
                 type="text"
@@ -232,7 +235,6 @@ export const SaleForm = () => {
               />
 
               <TextField
-                autoFocus
                 name="lastName"
                 label="Apellidos"
                 type="text"
@@ -245,8 +247,8 @@ export const SaleForm = () => {
             </Stack>
 
             <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={0}>
-              <TableContainer sx={{ maxHeight: 450 }}>
-                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableContainer sx={{ maxHeight: '47vh' }}>
+                <Table stickyHeader aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="left">Codigo</TableCell>
@@ -277,7 +279,7 @@ export const SaleForm = () => {
                   <TableFooter>
                     <TableRow>
                       <TableCell variant="head" align="left">Total:</TableCell>
-                      <TableCell colSpan={3} />
+                      <TableCell colSpan={2} />
                       <TableCell variant="head" align="center">{setTotal()} Bs</TableCell>
                       <TableCell />
                     </TableRow>
