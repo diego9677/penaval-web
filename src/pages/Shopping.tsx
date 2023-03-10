@@ -35,7 +35,7 @@ const Row = ({ row }: { row: ShoppingType; }) => {
           {row.id}
         </TableCell>
         <TableCell align="center">{row.provider.name}</TableCell>
-        <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:MM')}</TableCell>
+        <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
         <TableCell align="center">{row.shoppingDetail.length}</TableCell>
       </TableRow>
 
@@ -144,7 +144,7 @@ export const Shopping = () => {
 
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           {!loading &&
-            <TableContainer sx={{ maxHeight: 600 }}>
+            <TableContainer sx={{ maxHeight: '70vh' }}>
               <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>

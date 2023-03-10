@@ -35,7 +35,7 @@ const Row = ({ row }: { row: Sale; }) => {
           {row.client.nit}
         </TableCell>
         <TableCell align="center">{row.client.person.firstName} {row.client.person.lastName}</TableCell>
-        <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:MM')}</TableCell>
+        <TableCell align="center">{dayjs(row.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
         <TableCell align="center">{row.saleDetail.length}</TableCell>
       </TableRow>
 
@@ -142,7 +142,7 @@ export const Sales = () => {
 
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           {!loading &&
-            <TableContainer sx={{ maxHeight: 600 }}>
+            <TableContainer sx={{ maxHeight: '70vh' }}>
               <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>

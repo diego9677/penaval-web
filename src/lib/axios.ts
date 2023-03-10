@@ -1,8 +1,9 @@
 import axios, { AxiosError } from "axios";
 
+const baseURL = process.env.API_URL;
 
 const axiosInstance = axios.create({
-  baseURL: 'https://penaval.com/api'
+  baseURL,
 });
 
 

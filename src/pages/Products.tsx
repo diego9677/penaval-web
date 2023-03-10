@@ -32,6 +32,10 @@ export const Products = () => {
     }
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await getProducts();
+  };
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -40,17 +44,19 @@ export const Products = () => {
           <Button variant="outlined" color="primary" size="small" component={Link} to='/products/form'>
             Nuevo
           </Button>
-          <Stack direction="row" spacing={2}>
-            <TextField id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
-            <Button type="button" variant="outlined" color="success" size="small" onClick={() => getProducts()}>
-              <SearchOutlinedIcon />
-            </Button>
-          </Stack>
+          <form onSubmit={onSubmit}>
+            <Stack direction="row" spacing={2}>
+              <TextField type="text" id="search" label="Buscar" variant="outlined" size="small" onChange={(e) => setSearch(e.target.value)} />
+              <Button type="submit" variant="outlined" color="success" size="small">
+                <SearchOutlinedIcon />
+              </Button>
+            </Stack>
+          </form>
         </Stack>
 
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           {!loading &&
-            <TableContainer sx={{ maxHeight: 600 }}>
+            <TableContainer sx={{ maxHeight: '70vh' }}>
               <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
@@ -80,7 +86,7 @@ export const Products = () => {
                       <TableCell align="center">
                         <Chip sx={{ padding: '1px 2px 1px 2px' }} label={<Typography variant="body2">{row.stock}</Typography>} variant="outlined" color={row.stock > 0 ? 'success' : 'error'} />
                       </TableCell>
-                      <TableCell align="center">{row.price}</TableCell>
+                      <TableCell align="center">{row.price} Bs</TableCell>
                       <TableCell align="center">
                         <Button size="small" variant="text" color="success" component={Link} to={`/products/form?id=${row.id}`}>
                           <ModeEditOutlineOutlinedIcon />
