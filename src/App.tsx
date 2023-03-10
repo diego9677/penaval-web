@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,6 +21,7 @@ import { PlaceForm } from "./pages/PlaceForm";
 import { ProductForm } from "./pages/ProductForm";
 import { ShoppingForm } from "./pages/ShoppingForm";
 import { SaleForm } from "./pages/SaleForm";
+import { useMediaQuery } from "@mui/material";
 
 
 
